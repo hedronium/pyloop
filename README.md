@@ -33,7 +33,7 @@ It will create a pack.json file into the project directory
 }
 ```
 
-### install packages
+### install packages (from pack.json)
 it will install all your packages globally (because pip or pypy install everything globally)
 ```bash
 sudo pyloop install
@@ -44,4 +44,14 @@ it will update all your packages globally (because pip or pypy install everythin
 
 ```bash
 sudo pyloop update
+```
+
+### install packages using pyloop
+
+```bash
+sudo pyloop install flask using pip3 <version>
+```
+OR
+```bash
+sudo pyloop install <package> using <channel> <version>
 ```
