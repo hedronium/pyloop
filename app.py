@@ -2,15 +2,16 @@ import click
 import os
 #from app import inits
 import sys
-from colorama import init
 from termcolor import cprint 
 from pyfiglet import figlet_format
-cprint(figlet_format('Pyloop!', font='starwars'),
-       'green', attrs=['bold'])
+from src.process import process
+
+process = process()
+
+cprint(figlet_format('Pyloop!', font='starwars'),'green', attrs=['bold'])
 
 @click.group()
 def index():
-
 	pass
 
 @index.command('install')
@@ -21,15 +22,21 @@ def install(string):
 
 @index.command('init')
 def init():
-	""" Initialize json file """ 
+	""" Initialize json file """
+	click.secho("Intializing json file as pack.json",fg='green')
 	file_name = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
-	
-	name 			= click.prompt('name', type=str) | file_name
-	version 		= click.prompt('version',type=str) | '1.0.0'
-	description 	= click.prompt('description',type=str)
-	author 			= click.prompt('author',type=str)
-	author_email 	= click.prompt('author email',type=str)
-	channels 		= click.prompt('Channels(comma separated)',type=str) | ['pip','pip3','pypy']
+	print(file_name)
+
+	name 			= click.prompt('name', type=str, default=file_name)
+	version 		= click.prompt('version',type=str,default='1.0.0')
+	description 	= click.prompt('description',type=str,default='')
+	author 			= click.prompt('author',type=str,default='')
+	author_email 	= click.prompt('author email',type=str,default='')
+	channels 		= click.prompt('Channels(comma separated)',type=str,default="pip,pip3,pypy")
+
+	#inserting data into class variables
+	process.getCliData(name,version,description,author,author_email,channels)
+
 
 @index.command('update')
 def update():
