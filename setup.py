@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-			name="Pyloop",
+		name="Pyloop",
 		version="0.01",
 		py_modules = ['app'],
 		install_requires=[
@@ -15,5 +15,5 @@ setup(
 			pyloop=app:index
 		''',
 		author = 'Hedronium',
-		author_email= ''
+		author_email= 'aniruddha@anichakraborty.me'
 	)

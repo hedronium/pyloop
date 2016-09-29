@@ -1,0 +1,13 @@
+{
+    "description": "",
+    "channels": {
+        "pip": {},
+        "pypi": {},
+        "pypm": {},
+        "pip3": {}
+    },
+    "name": "pyloop",
+    "authorEmail": "",
+    "version": "1.0.0",
+    "author": ""
+}
