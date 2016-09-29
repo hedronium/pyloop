@@ -1,4 +1,5 @@
 import click
+import json
 
 class process:
 	def __init__(self):
@@ -22,18 +23,31 @@ class process:
 
 		self.channels = channels.split(',')
 		totalcomma  = channels.count(',')
-		print(totalcomma)
-		if (self.channels == (totalcomma - 1)):
+
+		if ((len(self.channels)-1) == totalcomma ):
 			self.createJson()
 		else:
 			click.secho('The channels should be a comma separeted string',fg='red')
 
 	#Creates json schema from 
-	def createJson():
+	def createJson(self):
 		self.json = {
-
 			"name": self.name,
 			"version": self.version,
-			"description": self.description
+			"description": self.description,
+			"channels": {
+
+					"pypy":{
+
+					},
+					"pip":{
+
+					},
+					"pip3":{
+
+					}
+			},
+			"author":self.author,
+			"authorEmail": self.author_email
 		}
-		print(self.channels.json())
+		print(json.dumps(self.json,ensure_ascii=False,indent=4))
