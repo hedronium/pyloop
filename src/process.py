@@ -123,7 +123,7 @@ class process:
 		self.installer(commands)
 		click.secho('Command executed sucessfully!',fg='green')
 
-	def validateSchema(self,json):
+	def validateSchema(self):
 		schema = {
 			"type" : "object",
 				"properties": {
