@@ -72,7 +72,7 @@ class process:
 		file = open('pack.json','w')
 		file.write(self.json)
 		file.close()
-		click.secho('Successfully created pack.json!')
+		click.secho('Successfully created pack.json!',fg='green')
 
 	#installing intital file
 	def installInitial(self):
@@ -182,14 +182,13 @@ class process:
 	def get(self,count,file):
 		commands = []
 
-		for i in range(0,count):
-			pack_name = click.prompt('Package name', type=str)
-			version   = click.prompt('Pacakge version',type=str)
-			channel   = click.prompt('Package channel',type=str ,default='pip3')
-			commandString = channel + ' install ' +  pack_name + '=='+version
-			commands.append(commandString)
-			click.secho('Checking for duplicate package under same channels....',fg='green')
-			self.checkPackExists(file,pack_name,version,channel)
+		pack_name = click.prompt('Package name', type=str)
+		version   = click.prompt('Pacakge version',type=str)
+		channel   = click.prompt('Package channel',type=str ,default='pip3')
+		commandString = channel + ' install ' +  pack_name + '=='+version
+		commands.append(commandString)
+		click.secho('Checking for duplicate package under same channels....',fg='green')
+		self.checkPackExists(file,pack_name,version,channel)
 
 
 	def loadJson(self,jsonString):
@@ -199,7 +198,7 @@ class process:
 			exit()
 		else:
 			try:
-				json.loads(jsonString)
+				return json.loads(jsonString)
 			except ValueError as e:
 				click.secho(e,fg='red')
 				exit()
@@ -216,7 +215,12 @@ class process:
 		self.validateSchema()
 		channels = self.json['channels']
 
-		if not channels[channel]:
+		if channels[channel] == None:
+			
+			click.secho('New channel detected...',fg='green')
+			self.add_channel(pack_name,version,channel)
+
+		else:
 
 			for key,value in channels[channel].items():
 				if (key == pack_name and value == version):
@@ -229,7 +233,7 @@ class process:
 					break
 
 			if (match == 1):
-				click.secho('ERROR: '+pack_name + ' with a version of '+ version + ' is already in pack.json , it means ' + pack_name +  ' is already installed or run "pyloop install"',fg='red')
+				click.secho('ERROR: '+ pack_name + ' with a version of '+ version + ' is already in pack.json , it means ' + pack_name +  ' is already installed or run "pyloop install"',fg='red')
 				exit()
 
 			elif (match == 2):
@@ -240,29 +244,43 @@ class process:
 				if (check == 'y'):
 					commands.append(channel + ' install ' + key + '=='+value)
 					#replace current version
-					self.replaceJson(pack_name,version,channel)
+					self.replaceJson(file,pack_name,version,channel)
 				else:
 					click.secho('Terminating current package installation process')					
 			else:
 				click.secho('Adding json data into pack.json...',fg='green')
-				self.addJson(pack_name,version,channel)
-
-		else:
-			click.secho('New channel detected...',fg='green')
-			self.add_channel(pack_name,version,channel)
+				self.addJson(file,pack_name,version,channel)
 
 
 
-
-	def replaceJson(self,pack_name,version,channel):
+	def replaceJson(self,file,pack_name,version,channel):
 		
 		channels = self.json['channels']
 		channels[channel][pack_name] = version
-		print(channels)
+		string = json.dumps(self.json,ensure_ascii=False,indent=4)
+
+		file = open(file,'w')
+		file.write('')
+
+		file.write(string)
+
+		file.close()
+		click.secho('Successfully updated version pack.json , please run "pyloop update" to update packages',fg='green')
 
 
-	def addJson(self,pack_name,version,channel):
-		return 0
+	def addJson(self,file,pack_name,version,channel):
+		channels = self.json['channels']
+		channels[channel].update({ pack_name: version })
+		string = json.dumps(self.json,ensure_ascii=False,indent=4)
+
+
+		file = open(file,'w')
+		file.write('')
+
+		file.write(string)
+
+		file.close()
+		click.secho('Successfully added ' + pack_name + ' with version '+ version +' in pack.json into ' + channel + ' channel, please run "pyloop update" to update packages',fg='green')
 
 	def add_channel(self,pack_name,version,channel):
 		return 0
