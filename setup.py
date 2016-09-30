@@ -8,7 +8,8 @@ setup(
 			'Click',
 			'colorama',
 			'termcolor',
-			'pyfiglet'
+			'pyfiglet',
+			'jsonschema'
 		],
 		entry_points = '''
 			[console_scripts]

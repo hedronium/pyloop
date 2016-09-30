@@ -1,6 +1,7 @@
 import os,sys
 import click
 import json
+from jsonschema import validate
 
 class process:
 	def __init__(self):
@@ -102,6 +103,7 @@ class process:
 		string = fopen.read()
 		fopen.close()
 		self.json = json.loads(string)
+		self.validateSchema()
 		self.getInstallInfo()
 		
 	#extract particuler information and call installer method
@@ -115,8 +117,50 @@ class process:
 		for key,value in channels.items():
 			channel = key
 			for key,value in channels[key].items():
-				comString = channel + ' install ' + key + '==='+value
+				comString = channel + ' install ' + key + '=='+value
 				commands.append(comString)
 		#install everything in the list
 		self.installer(commands)
 		click.secho('Command executed sucessfully!',fg='green')
+
+	def validateSchema(self,json):
+		schema = {
+			"type" : "object",
+				"properties": {
+					"name": {
+
+							"type": "string"
+						},
+					
+					"version": {
+							"type":"string"
+						},
+					
+					"author": {
+							"type":"string"
+						},
+					
+					"authorEmail":{
+						
+						"type":"string"
+						
+						},
+					"description":{
+
+						"type":"string"
+						
+						},
+					"channels":{
+
+							"type":"object",
+
+							"properties": {
+
+								"type":"string"
+
+							}
+					}
+
+				}
+		}
+		validate(schema,self.json)
