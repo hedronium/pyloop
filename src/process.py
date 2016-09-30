@@ -1,7 +1,7 @@
 import os,sys
 import click
 import json
-from jsonschema import validate
+from jsonschema import validate,ValidationError, SchemaError
 
 class process:
 	def __init__(self):
@@ -124,6 +124,9 @@ class process:
 		click.secho('Command executed sucessfully!',fg='green')
 
 	def validateSchema(self):
+		
+		click.secho('validating json schema...',fg='blue')
+
 		schema = {
 			"type" : "object",
 				"properties": {
@@ -163,7 +166,67 @@ class process:
 
 				}
 		}
-		validate(schema,self.json)
 
-	def get(self,count):
+		try:
+		
+			validate(schema,self.json)
+		
+		except json.ValidationError as e:
+			
+			click.secho(e.message,fg='red')
+
+		except json.SchemaError as e:
+
+			click.secho(e,fg='red')
+
+	def get(self,count,file):
+		commands = []
+
+		for i in range(0,count):
+			pack_name = click.prompt('Package name', type=str)
+			version   = click.prompt('Pacakge version',type=str)
+			channel   = click.prompt('Package channel',type=str ,default='pip3')
+			commandString = channel + ' install ' +  pack_name + '=='+version
+			commands.append(commandString)
+			click.secho('Checking for duplicate package under same channels....',fg='green')
+			self.checkPackExists(file,pack_name,version,channel)
+
+
+	def checkPackExists(self,file,pack_name,version,channel):
+
+		commands = []
+
+		fopen = open(file)
+		string = fopen.read()
+		fopen.close()
+		self.json = json.loads(string)
+		self.validateSchema()
+		channels = self.json['channels']
+		
+		for key,value in channels[channel].items():
+			if (key == pack_name and value == version):
+				click.secho('ERROR: '+pack_name + ' with a version of '+ version + ' is already in pack.json , it means it\' already installed or run "pyloop install"',fg='red')
+				exit()
+			
+			elif (key == pack_name and version != value):
+				click.secho('WARNING: '+ pack_name + ' is already in the ' + channel + 'block , it will add the new version into pack.json',fg='yellow')
+				check = click.prompt('Are you sure?', type=str,default='y')
+
+				if (check == 'y'):
+					commands.append(channel + ' install ' + key + '=='+value)
+					#replace current version
+					self.replaceJson(pack_name,version,channel)
+				else:
+					click.secho('Terminating current package installation process')
+			else:
+				self.addJson(pack_name,version,channel)
+
+
+	def replaceJson(self,pack_name,version,channel):
+		
+		channels = self.json['channels']
+		print(channels)	
+
+
+	def addJson(pack_name,version,channel):
 		return 0

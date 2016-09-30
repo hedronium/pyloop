@@ -1,6 +1,5 @@
 import click
 import os
-#from app import inits
 import sys
 from termcolor import cprint 
 from pyfiglet import figlet_format
@@ -47,7 +46,8 @@ def update():
 @click.option('--count',default=1,help='How many packages you want to install')
 def get(count):
 	""" get desired package installed """
-	process.get(count)
+	file = os.getcwd()+'/pack.json'
+	process.get(count,file)
 	return 0
 
 
