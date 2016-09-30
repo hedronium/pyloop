@@ -7,7 +7,6 @@ from pyfiglet import figlet_format
 from src.process import process
 
 process = process()
-
 cprint(figlet_format('Pyloop!', font='starwars'),'green', attrs=['bold'])
 
 @click.group()
@@ -15,9 +14,11 @@ def index():
 	pass
 
 @index.command('install')
-def install(string):
+def install():
 	""" Scripts that greets you """
-	print(string)
+	file = os.getcwd()+'/pack.json'
+	print(file)
+	process.install(file)
 
 
 @index.command('init')
@@ -25,7 +26,6 @@ def init():
 	""" Initialize json file """
 	click.secho("Intializing json file as pack.json",fg='green')
 	file_name = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
-	print(file_name)
 
 	name 			= click.prompt('name', type=str, default=file_name)
 	version 		= click.prompt('version',type=str,default='1.0.0')

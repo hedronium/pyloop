@@ -58,10 +58,11 @@ class process:
 		self.json = string
 		print(self.json)
 		click.echo('This is will remove your previous pack.json and replace with new')
-		sure = click.prompt('Are you sure you want renew your pack.json?', type=str, default='y')
+		sure = click.prompt('Are you sure you want renew/write your pack.json?', type=str, default='y')
 
 		if (sure == 'y'):
 			self.insertIntoFolder()
+			self.installInitial()
 		else:
 			click.secho('Process aborted',fg='red')
 
@@ -70,6 +71,7 @@ class process:
 		file = open('pack.json','w')
 		file.write(self.json)
 		file.close()
+		click.secho('Successfully created pack.json!')
 
 	#installing intital file
 	def installInitial(self):
@@ -87,8 +89,34 @@ class process:
 			click.secho("process aborted",fg='red')
 
 	#it's job is to install everythin
-	def installer(commands):
+	def installer(self,commands):
 		for command in commands:
-			commandString = 'Running command '+command
-			click.secho(command,fg='yellow')
-			sys.command(command)
+			commandString = 'Running command "'+command+ '" ...'
+			click.secho(commandString,fg='yellow')
+			os.system(command)
+
+	#installer script starts from here, extracting json data from pack.json
+	def install(self,file):
+
+		fopen = open(file)
+		string = fopen.read()
+		fopen.close()
+		self.json = json.loads(string)
+		self.getInstallInfo()
+		
+	#extract particuler information and call installer method
+	def getInstallInfo(self):
+		channels = self.json['channels']
+		commands = []
+		comString = ''
+		channel = ''
+		#print(channels)
+
+		for key,value in channels.items():
+			channel = key
+			for key,value in channels[key].items():
+				comString = channel + ' install ' + key + '==='+value
+				commands.append(comString)
+		#install everything in the list
+		self.installer(commands)
+		click.secho('Command executed sucessfully!',fg='green')
