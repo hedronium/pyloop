@@ -192,24 +192,49 @@ class process:
 			self.checkPackExists(file,pack_name,version,channel)
 
 
+	def loadJson(self,jsonString):
+			
+		if not jsonString:
+			click.secho('pack.json is empty!',fg='red')
+			exit()
+		else:
+			try:
+				json.loads(jsonString)
+			except ValueError as e:
+				click.secho(e,fg='red')
+				exit()
+	
 	def checkPackExists(self,file,pack_name,version,channel):
 
 		commands = []
+		match = ''
 
 		fopen = open(file)
 		string = fopen.read()
 		fopen.close()
-		self.json = json.loads(string)
+		self.json = self.loadJson(string)
 		self.validateSchema()
 		channels = self.json['channels']
-		
-		for key,value in channels[channel].items():
-			if (key == pack_name and value == version):
-				click.secho('ERROR: '+pack_name + ' with a version of '+ version + ' is already in pack.json , it means it\' already installed or run "pyloop install"',fg='red')
+
+		if not channels[channel]:
+
+			for key,value in channels[channel].items():
+				if (key == pack_name and value == version):
+					match = 1
+					break
+
+				elif (key == pack_name and version != value):
+
+					match = 2
+					break
+
+			if (match == 1):
+				click.secho('ERROR: '+pack_name + ' with a version of '+ version + ' is already in pack.json , it means ' + pack_name +  ' is already installed or run "pyloop install"',fg='red')
 				exit()
-			
-			elif (key == pack_name and version != value):
-				click.secho('WARNING: '+ pack_name + ' is already in the ' + channel + 'block , it will add the new version into pack.json',fg='yellow')
+
+			elif (match == 2):
+
+				click.secho('WARNING: '+ pack_name + ' is already in the ' + channel + ' block , it will add the new version into pack.json',fg='yellow')
 				check = click.prompt('Are you sure?', type=str,default='y')
 
 				if (check == 'y'):
@@ -217,16 +242,27 @@ class process:
 					#replace current version
 					self.replaceJson(pack_name,version,channel)
 				else:
-					click.secho('Terminating current package installation process')
+					click.secho('Terminating current package installation process')					
 			else:
+				click.secho('Adding json data into pack.json...',fg='green')
 				self.addJson(pack_name,version,channel)
+
+		else:
+			click.secho('New channel detected...',fg='green')
+			self.add_channel(pack_name,version,channel)
+
+
 
 
 	def replaceJson(self,pack_name,version,channel):
 		
 		channels = self.json['channels']
-		print(channels)	
+		channels[channel][pack_name] = version
+		print(channels)
 
 
-	def addJson(pack_name,version,channel):
+	def addJson(self,pack_name,version,channel):
+		return 0
+
+	def add_channel(self,pack_name,version,channel):
 		return 0
