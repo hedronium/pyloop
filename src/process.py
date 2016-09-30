@@ -215,10 +215,10 @@ class process:
 		self.validateSchema()
 		channels = self.json['channels']
 
-		if channels[channel] == None:
-			
+		if channel not in channels:
+
 			click.secho('New channel detected...',fg='green')
-			self.add_channel(pack_name,version,channel)
+			self.add_channel(file,channel)
 
 		else:
 
@@ -282,5 +282,16 @@ class process:
 		file.close()
 		click.secho('Successfully added ' + pack_name + ' with version '+ version +' in pack.json into ' + channel + ' channel, please run "pyloop update" to update packages',fg='green')
 
-	def add_channel(self,pack_name,version,channel):
-		return 0
+	def add_channel(self,file,channel):
+		channels = self.json['channels']
+		data = { channel: {} }
+		channels.update(data)
+		string = json.dumps(self.json,ensure_ascii=False,indent=4)
+
+		file = open(file,'w')
+		file.write('')
+
+		file.write(string)
+
+		file.close()
+		click.secho('Successfully added a new channel name "' + channel + '"...',fg='green')
