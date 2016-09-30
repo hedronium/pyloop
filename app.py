@@ -15,9 +15,8 @@ def index():
 
 @index.command('install')
 def install():
-	""" Scripts that greets you """
+	""" Installs everything in the pack.json """
 	file = os.getcwd()+'/pack.json'
-	print(file)
 	process.install(file)
 
 
@@ -42,6 +41,14 @@ def init():
 def update():
 	""" Updates from json folder """
 	return 0
+
+
+@index.command('get')
+@click.option('--count',default=1,help='How many packages you want to install')
+def get():
+	""" get desired package installed """
+	return 0
+
 
 @index.command('clear')
 def clear():
