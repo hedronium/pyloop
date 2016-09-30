@@ -164,3 +164,6 @@ class process:
 				}
 		}
 		validate(schema,self.json)
+
+	def get(self,count):
+		return 0

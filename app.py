@@ -15,7 +15,7 @@ def index():
 
 @index.command('install')
 def install():
-	""" Installs everything in the pack.json """
+	""" Installs everything in the pack.json	 """
 	file = os.getcwd()+'/pack.json'
 	process.install(file)
 
@@ -45,8 +45,9 @@ def update():
 
 @index.command('get')
 @click.option('--count',default=1,help='How many packages you want to install')
-def get():
+def get(count):
 	""" get desired package installed """
+	process.get(count)
 	return 0
 
 
