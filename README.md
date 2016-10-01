@@ -28,7 +28,6 @@ It will create a pack.json file into the project directory
     },
     "pypy": {
         "django": "1.9",
-        "mysql-driver": "*" //this will get the latest version
     }
 }
 ```
