@@ -47,9 +47,6 @@ class process:
 					},
 					"pip3":{
 
-					},
-					"pypm":{
-
 					}
 			},
 			"author":self.author,
@@ -102,7 +99,7 @@ class process:
 		fopen = open(file)
 		string = fopen.read()
 		fopen.close()
-		self.json = self.loadJson(self,string)
+		self.json = self.loadJson(string)
 		self.validateSchema()
 		self.getInstallInfo()
 		
