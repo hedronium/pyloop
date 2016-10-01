@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
 		name="Pyloop",
-		version="0.01",
+		version="0.10",
 		py_modules = ['app'],
 		install_requires=[
 			'Click',
