@@ -299,6 +299,3 @@ class process:
 
 		file.close()
 		click.secho('Successfully added a new channel name "' + channel + '"...',fg='green')
-
-	def update(self):
-		return 0
