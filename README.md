@@ -46,12 +46,8 @@ it will update all your packages globally (because pip or pypy install everythin
 sudo pyloop update
 ```
 
-### install packages using pyloop
+### install packages using pyloop (It'll update pack.json)
 
 ```bash
-sudo pyloop install flask using pip3 <version>
-```
-OR
-```bash
-sudo pyloop install <package> using <channel> <version>
+sudo pyloop get
 ```
