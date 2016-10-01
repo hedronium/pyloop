@@ -39,6 +39,7 @@ def init():
 @index.command('update')
 def update():
 	""" Updates from json folder """
+	process.update()
 	return 0
 
 
@@ -48,6 +49,10 @@ def get(count):
 	""" get desired package installed """
 	file = os.getcwd()+'/pack.json'
 	process.get(count,file)
+	return 0
+
+@index.command('self-update')
+def selfUpdate():
 	return 0
 
 

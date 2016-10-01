@@ -219,6 +219,7 @@ class process:
 
 			click.secho('New channel detected...',fg='green')
 			self.add_channel(file,channel)
+			self.addJson(file,pack_name,version,channel)
 
 		else:
 
@@ -259,13 +260,15 @@ class process:
 		channels[channel][pack_name] = version
 		string = json.dumps(self.json,ensure_ascii=False,indent=4)
 
+		os.system(channel +' install ' + pack_name + '==' + version)
+
 		file = open(file,'w')
 		file.write('')
 
 		file.write(string)
 
 		file.close()
-		click.secho('Successfully updated version pack.json , please run "pyloop update" to update packages',fg='green')
+		click.secho('Successfully updated new version pack.json , please run "pyloop update" to update packages',fg='green')
 
 
 	def addJson(self,file,pack_name,version,channel):
@@ -273,6 +276,7 @@ class process:
 		channels[channel].update({ pack_name: version })
 		string = json.dumps(self.json,ensure_ascii=False,indent=4)
 
+		os.system(channel +' install ' + pack_name + '==' + version)
 
 		file = open(file,'w')
 		file.write('')
@@ -295,3 +299,6 @@ class process:
 
 		file.close()
 		click.secho('Successfully added a new channel name "' + channel + '"...',fg='green')
+
+	def update(self):
+		return 0
