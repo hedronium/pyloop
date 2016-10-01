@@ -1,3 +1,4 @@
 pack.json
-/Pyloop.egg-info
+/pyloop.egg-info
 /_pycache_
+/pyloop/__pycache__
