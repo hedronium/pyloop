@@ -36,12 +36,6 @@ def init():
 	process.getCliData(name,version,description,author,author_email,channels)
 
 
-@index.command('update')
-def update():
-	""" Updates from json folder """
-	process.update()
-	return 0
-
 
 @index.command('get')
 @click.option('--count',default=1,help='How many packages you want to install')
@@ -49,12 +43,6 @@ def get(count):
 	""" get desired package installed """
 	file = os.getcwd()+'/pack.json'
 	process.get(count,file)
-	return 0
-
-@index.command('self-update')
-def selfUpdate():
-	return 0
-
 
 @index.command('clear')
 def clear():
