@@ -1,0 +1,6 @@
+{
+  "name": "Pyloop",
+  "tagline": "An universal package manager for python",
+  "body": "# Pyloop\r\nAn universal npm like package manager for python\r\n## How it works?\r\n> it uses json data to track your installed packages using channels like pip or pypy . pyloop will help programmers to maintain multiple package installation using multiple channels.\r\n\r\n## Installation\r\n> Grab it using pip\r\n\r\n```bash\r\nsudo pip3 install pyloop\r\n```\r\n\r\n# Usage #\r\n\r\n### intialize pyloop\r\n```bash\r\npyloop init\r\n```\r\nIt will create a pack.json file into the project directory\r\n\r\n### write \r\n```json\r\n{\r\n   \"name\": \"My project\",\r\n   \"pip3\": {\r\n        \"flask\": \"0.7\" ,\r\n        \"flask-WTF\": \"0.9\"\r\n    },\r\n    \"pypy\": {\r\n        \"django\": \"1.9\",\r\n    }\r\n}\r\n```\r\n\r\n### install packages (from pack.json)\r\nit will install all your packages globally (because pip or pypy install everything globally)\r\n```bash\r\nsudo pyloop install\r\n```\r\n\r\n### update packages\r\nit will update all your packages globally (because pip or pypy install everything globally)\r\n\r\n```bash\r\nsudo pyloop update\r\n```\r\n\r\n### install packages using pyloop (It'll update pack.json)\r\n\r\n```bash\r\nsudo pyloop get\r\n```\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}

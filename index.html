@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Pyloop by Hedronium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Pyloop</h1>
+      <h2 class="project-tagline">An universal package manager for python</h2>
+      <a href="https://github.com/Hedronium/pyloop" class="btn">View on GitHub</a>
+      <a href="https://github.com/Hedronium/pyloop/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Hedronium/pyloop/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="pyloop" class="anchor" href="#pyloop" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pyloop</h1>
+
+<p>An universal npm like package manager for python</p>
+
+<h2>
+<a id="how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How it works?</h2>
+
+<blockquote>
+<p>it uses json data to track your installed packages using channels like pip or pypy . pyloop will help programmers to maintain multiple package installation using multiple channels.</p>
+</blockquote>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<blockquote>
+<p>Grab it using pip</p>
+</blockquote>
+
+<div class="highlight highlight-source-shell"><pre>sudo pip3 install pyloop</pre></div>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<h3>
+<a id="intialize-pyloop" class="anchor" href="#intialize-pyloop" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>intialize pyloop</h3>
+
+<div class="highlight highlight-source-shell"><pre>pyloop init</pre></div>
+
+<p>It will create a pack.json file into the project directory</p>
+
+<h3>
+<a id="write" class="anchor" href="#write" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>write</h3>
+
+<div class="highlight highlight-source-json"><pre>{
+   <span class="pl-s"><span class="pl-pds">"</span>name<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>My project<span class="pl-pds">"</span></span>,
+   <span class="pl-s"><span class="pl-pds">"</span>pip3<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>flask<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.7<span class="pl-pds">"</span></span> ,
+        <span class="pl-s"><span class="pl-pds">"</span>flask-WTF<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.9<span class="pl-pds">"</span></span>
+    },
+    <span class="pl-s"><span class="pl-pds">"</span>pypy<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>django<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>1.9<span class="pl-pds">"</span></span>,
+    }
+}</pre></div>
+
+<h3>
+<a id="install-packages-from-packjson" class="anchor" href="#install-packages-from-packjson" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>install packages (from pack.json)</h3>
+
+<p>it will install all your packages globally (because pip or pypy install everything globally)</p>
+
+<div class="highlight highlight-source-shell"><pre>sudo pyloop install</pre></div>
+
+<h3>
+<a id="update-packages" class="anchor" href="#update-packages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>update packages</h3>
+
+<p>it will update all your packages globally (because pip or pypy install everything globally)</p>
+
+<div class="highlight highlight-source-shell"><pre>sudo pyloop update</pre></div>
+
+<h3>
+<a id="install-packages-using-pyloop-itll-update-packjson" class="anchor" href="#install-packages-using-pyloop-itll-update-packjson" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>install packages using pyloop (It'll update pack.json)</h3>
+
+<div class="highlight highlight-source-shell"><pre>sudo pyloop get</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Hedronium/pyloop">Pyloop</a> is maintained by <a href="https://github.com/Hedronium">Hedronium</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
