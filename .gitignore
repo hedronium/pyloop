@@ -2,3 +2,4 @@ pack.json
 /pyloop.egg-info
 /_pycache_
 /pyloop/__pycache__
+/dist
