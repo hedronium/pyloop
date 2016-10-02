@@ -30,7 +30,7 @@ def init():
 	description 	= click.prompt('description',type=str,default='')
 	author 			= click.prompt('author',type=str,default='')
 	author_email 	= click.prompt('author email',type=str,default='')
-	channels 		= click.prompt('Channels(comma separated)',type=str,default="pip,pip3,pypy")
+	channels 		= click.prompt('Channels(comma separated)',type=str,default="pip,pip3")
 
 	#inserting data into class variables
 	process.getCliData(name,version,description,author,author_email,channels)

@@ -39,9 +39,6 @@ class process:
 			"description": self.description,
 			"channels": {
 
-					"pypi":{
-
-					},
 					"pip":{
 
 					},
@@ -60,7 +57,6 @@ class process:
 
 		if (sure == 'y'):
 			self.insertIntoFolder()
-			self.installInitial()
 		else:
 			click.secho('Process aborted',fg='red')
 
@@ -70,21 +66,6 @@ class process:
 		file.write(self.json)
 		file.close()
 		click.secho('Successfully created pack.json!',fg='green')
-
-	#installing intital file
-	def installInitial(self):
-		click.secho('To make things more comfortable we want to install some packages(pip,pip3,pypi,pypm)',fg='yellow')
-		sure = click.prompt('Will you allow to install?',default='y',type=str)
-		if (sure == 'y'):
-			commands = [
-				'python install pip',
-				'python3 install pip3',
-				'python3 install pypi',
-				'python3 install pypm'
-			]
-			self.installer(commands)
-		else:
-			click.secho("process aborted",fg='red')
 
 	#it's job is to install everythin
 	def installer(self,commands):
