@@ -176,6 +176,7 @@ class process:
 
 			click.secho(e,fg='red')
 
+	# get data from cli command
 	def get(self,count,file):
 		commands = []
 
@@ -188,6 +189,7 @@ class process:
 		self.checkPackExists(file,pack_name,version,channel)
 
 
+	#Loads json , it checks for json,and loads json string into self.json
 	def loadJson(self,jsonString):
 			
 		if not jsonString:
@@ -200,6 +202,7 @@ class process:
 				click.secho(e,fg='red')
 				exit()
 	
+	#check for pack exists and it will decide what will do
 	def checkPackExists(self,file,pack_name,version,channel):
 
 		commands = []
@@ -250,7 +253,7 @@ class process:
 				self.addJson(file,pack_name,version,channel)
 
 
-
+	# Replace package version from a package name
 	def replaceJson(self,file,pack_name,version,channel):
 		
 		channels = self.json['channels']
@@ -268,6 +271,7 @@ class process:
 		click.secho('Successfully updated new version pack.json , please run "pyloop update" to update packages',fg='green')
 
 
+	#Adds data into a channel
 	def addJson(self,file,pack_name,version,channel):
 		channels = self.json['channels']
 		channels[channel].update({ pack_name: version })
@@ -283,6 +287,7 @@ class process:
 		file.close()
 		click.secho('Successfully added ' + pack_name + ' with version '+ version +' in pack.json into ' + channel + ' channel, please run "pyloop update" to update packages',fg='green')
 
+	# adds extra channel into channels
 	def add_channel(self,file,channel):
 		channels = self.json['channels']
 		data = { channel: {} }
