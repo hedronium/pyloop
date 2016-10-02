@@ -1,9 +1,9 @@
-from setuptools import setup
+from distutils.core import setup
 
 setup(
 		name="pyloop",
 		version="0.12",
-		py_modules = ['app'],
+		py_modules = ['pyloop.app','process'],
 		packages = ['pyloop'],
 		description='An universal pacakge manager for python',
 		install_requires=[

@@ -3,7 +3,7 @@ import os
 import sys
 from termcolor import cprint 
 from pyfiglet import figlet_format
-from pyloop.src.process import process
+from .process import process
 
 process = process()
 cprint(figlet_format('Pyloop!', font='starwars'),'green', attrs=['bold'])
