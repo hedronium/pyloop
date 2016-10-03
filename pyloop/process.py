@@ -162,7 +162,7 @@ class process:
 		commands = []
 
 		pack_name = click.prompt('Package name', type=str)
-		version   = click.prompt('Pacakge version',type=str)
+		version   = click.prompt('Package version',type=str)
 		channel   = click.prompt('Package channel',type=str ,default='pip3')
 		commandString = channel + ' install ' +  pack_name + '=='+version
 		commands.append(commandString)

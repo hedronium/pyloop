@@ -21,13 +21,20 @@ It will create a pack.json file into the project directory
 ### write 
 ```json
 {
-   "name": "My project",
-   "pip3": {
-        "flask": "0.7" ,
-        "flask-WTF": "0.9"
-    },
-    "pypy": {
-        "django": "1.9",
+    "authorEmail": "",
+    "author": "",
+    "description": "",
+    "name": "pyloop",
+    "version": "1.0.0",
+    "channels": {
+       "pip3": {
+            "flask": "0.7" ,
+            "flask-WTF": "0.9"
+        },
+        "pip": {
+            
+            "django": "1.9",
+        }
     }
 }
 ```
