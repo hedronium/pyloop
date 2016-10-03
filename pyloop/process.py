@@ -69,10 +69,14 @@ class process:
 
 	#it's job is to install everythin
 	def installer(self,commands):
-		for command in commands:
-			commandString = 'Running command "'+command+ '" ...'
-			click.secho(commandString,fg='yellow')
-			os.system(command)
+		if len(commands) > 0:
+
+			for command in commands:
+				commandString = 'Running command "'+command+ '" ...'
+				click.secho(commandString,fg='yellow')
+				os.system(command)
+		else:
+			click.secho('There is nothing to install!',fg='blue')
 
 	#installer script starts from here, extracting json data from pack.json
 	def install(self,file):
