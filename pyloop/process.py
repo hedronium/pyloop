@@ -286,3 +286,9 @@ class process:
 
 		file.close()
 		click.secho('Successfully added a new channel name "' + channel + '"...',fg='green')
+
+	def ls(self):
+		click.secho('Installed packages using pip3 channel...')
+		os.system('pip3 list')
+		click.secho('installed package using pip channel...')
+		os.system('pip list')

@@ -38,7 +38,6 @@ def init():
 
 
 @index.command('get')
-@click.option('--count',default=1,help='How many packages you want to install')
 def get(count):
 	""" get desired package installed """
 	file = os.getcwd()+'/pack.json'
@@ -48,3 +47,13 @@ def get(count):
 def clear():
 	""" Clear screens """
 	click.clear()
+
+@index.command('ls')
+def ls():
+	""" list of install packages """
+	process.ls()
+
+@index.command('test')
+@click.argument('yo',default='')
+def yo(yo):
+	print(yo)
