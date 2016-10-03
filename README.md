@@ -45,13 +45,6 @@ it will install all your packages globally (because pip or pypy install everythi
 sudo pyloop install
 ```
 
-### update packages
-it will update all your packages globally (because pip or pypy install everything globally)
-
-```bash
-sudo pyloop update
-```
-
 ### install packages using pyloop (It'll update pack.json)
 
 ```bash
